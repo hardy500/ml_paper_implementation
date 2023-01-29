@@ -1,6 +1,8 @@
 import torch
 from torch import nn
 
+# Paper: https://arxiv.org/pdf/2010.11929.pdf
+
 H, W, P, D = 224, 224, 16, 768
 N = int(H*W/P**2)
 

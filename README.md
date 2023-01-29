@@ -1,1 +1,2 @@
-# ml_paper_implementation
+# ml paper implementation
+Implementing AI algorithms
