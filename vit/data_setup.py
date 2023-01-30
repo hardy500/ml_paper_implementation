@@ -8,8 +8,10 @@ transform = transforms.Compose([
   transforms.ToTensor()
 ])
 
-BS = 32
-img_path = Path("data/pizza_steak_sushi")
-train_dir = img_path/"train"
-test_dir = img_path/"test"
-train_dl, test_dl, class_names = create_dl(train_dir, test_dir, transform, BS)
+def load_data(transform=transform):
+  BS = 32
+  img_path = Path("data/pizza_steak_sushi")
+  train_dir = img_path/"train"
+  test_dir = img_path/"test"
+  train_dl, test_dl, class_names = create_dl(train_dir, test_dir, transform, BS)
+  return train_dl, test_dl, class_names

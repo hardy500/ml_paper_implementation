@@ -42,8 +42,8 @@ def train_step(model, dl, loss_fn, optimizer, device):
   return train_loss, train_acc
 
 def test_step(model, dl, loss_fn, device):
-  # Put model in eval mode model.eval() # Setup test loss and test accuracy values test_loss, test_acc = 0, 0
-  # Turn on inference context manager
+  model.eval()
+  test_loss, test_acc = 0, 0
   with torch.inference_mode():
     # Loop through DataLoader batches
     for x, y in dl:
@@ -66,7 +66,7 @@ def test_step(model, dl, loss_fn, device):
   test_acc = test_acc / len(dl)
   return test_loss, test_acc
 
-def train(model, train_dataloader, test_dataloader, optimizer, loss_fn, epochs, device):
+def train(model, train_dl, test_dl, optimizer, loss_fn, epochs, device):
   # Create empty results dictionary
   results = {"train_loss": [],
               "train_acc": [],
@@ -80,12 +80,12 @@ def train(model, train_dataloader, test_dataloader, optimizer, loss_fn, epochs, 
   # Loop through training and testing steps for a number of epochs
   for epoch in tqdm(range(epochs)):
     train_loss, train_acc = train_step(model=model,
-                                        dl=train_dataloader,
+                                        dl=train_dl,
                                         loss_fn=loss_fn,
                                         optimizer=optimizer,
                                         device=device)
     test_loss, test_acc = test_step(model=model,
-        dl=test_dataloader,
+        dl=test_dl,
         loss_fn=loss_fn,
         device=device)
 
